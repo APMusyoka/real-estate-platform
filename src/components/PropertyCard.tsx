@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useFavorites } from '@/hooks/useFavorites';
+import { useToast } from '@/context/ToastContext';
 
 interface PropertyCardProps {
     id: string;
@@ -29,7 +30,19 @@ export default function PropertyCard({
     status,
 }: PropertyCardProps) {
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { success } = useToast();
     const favorited = isFavorite(id);
+
+    const handleFavoriteClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        toggleFavorite(id);
+
+        if (favorited) {
+            success('Removed from favorites');
+        } else {
+            success('Added to favorites! ❤️');
+        }
+    };
 
     const statusColors = {
         'for-sale': 'bg-[rgb(var(--color-status-for-sale))]',
@@ -76,10 +89,7 @@ export default function PropertyCard({
                     <button
                         className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all ${favorited ? 'scale-110' : ''
                             }`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            toggleFavorite(id);
-                        }}
+                        onClick={handleFavoriteClick}
                         aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
                     >
                         <svg

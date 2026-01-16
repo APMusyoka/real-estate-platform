@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Input, Lightbox } from '@/components';
 import { useFavorites } from '@/hooks/useFavorites';
+import { useToast } from '@/context/ToastContext';
 import { allProperties } from '@/data/allProperties';
 import { notFound } from 'next/navigation';
 
@@ -15,12 +16,24 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [lightboxIndex, setLightboxIndex] = useState(0);
     const { toggleFavorite, isFavorite } = useFavorites();
+    const { success } = useToast();
 
     if (!property) {
         notFound();
     }
 
     const favorited = isFavorite(property.id);
+
+    const handleFavoriteClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        toggleFavorite(property.id);
+
+        if (favorited) {
+            success('Removed from favorites');
+        } else {
+            success('Added to favorites! ❤️');
+        }
+    };
 
     // Mock additional images (in real app, these would come from the property data)
     const images = [
@@ -122,10 +135,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                             {statusLabels[property.status]}
                         </div>
                         <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                toggleFavorite(property.id);
-                            }}
+                            onClick={handleFavoriteClick}
                             className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-all ${favorited ? 'scale-110' : ''
                                 }`}
                         >
