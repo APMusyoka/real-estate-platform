@@ -3,4 +3,5 @@ export { default as Input } from './Input';
 export { default as PropertyCard } from './PropertyCard';
 export { default as MortgageCalculator } from './MortgageCalculator';
 export { default as Lightbox } from './Lightbox';
+export { default as PropertyMap } from './PropertyMap';
 

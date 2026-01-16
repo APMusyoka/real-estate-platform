@@ -14,6 +14,8 @@ export const allProperties = [
         type: 'apartment',
         yearBuilt: 2020,
         featured: false,
+        lat: 37.7749,
+        lng: -122.4194,
     },
     {
         id: '2',
@@ -30,6 +32,8 @@ export const allProperties = [
         type: 'villa',
         yearBuilt: 2018,
         featured: true,
+        lat: 34.0259,
+        lng: -118.7798,
     },
     {
         id: '3',
@@ -46,6 +50,8 @@ export const allProperties = [
         type: 'house',
         yearBuilt: 2022,
         featured: true,
+        lat: 30.2672,
+        lng: -97.7431,
     },
     {
         id: '4',
@@ -62,6 +68,8 @@ export const allProperties = [
         type: 'condo',
         yearBuilt: 2019,
         featured: false,
+        lat: 40.7614,
+        lng: -73.9776,
     },
     {
         id: '5',
@@ -78,6 +86,8 @@ export const allProperties = [
         type: 'house',
         yearBuilt: 2017,
         featured: true,
+        lat: 39.7392,
+        lng: -104.9903,
     },
     {
         id: '6',
@@ -94,6 +104,8 @@ export const allProperties = [
         type: 'apartment',
         yearBuilt: 2021,
         featured: false,
+        lat: 47.6062,
+        lng: -122.3321,
     },
     {
         id: '7',
@@ -110,6 +122,8 @@ export const allProperties = [
         type: 'house',
         yearBuilt: 2015,
         featured: false,
+        lat: 45.5152,
+        lng: -122.6784,
     },
     {
         id: '8',
@@ -126,6 +140,8 @@ export const allProperties = [
         type: 'condo',
         yearBuilt: 2019,
         featured: false,
+        lat: 41.8781,
+        lng: -87.6298,
     },
     {
         id: '9',
@@ -142,6 +158,8 @@ export const allProperties = [
         type: 'house',
         yearBuilt: 2010,
         featured: false,
+        lat: 44.9778,
+        lng: -93.2650,
     },
     {
         id: '10',
@@ -158,6 +176,8 @@ export const allProperties = [
         type: 'house',
         yearBuilt: 2020,
         featured: false,
+        lat: 42.3601,
+        lng: -71.0589,
     },
     {
         id: '11',
@@ -174,6 +194,8 @@ export const allProperties = [
         type: 'villa',
         yearBuilt: 2021,
         featured: true,
+        lat: 34.0736,
+        lng: -118.4004,
     },
     {
         id: '12',
@@ -190,6 +212,8 @@ export const allProperties = [
         type: 'apartment',
         yearBuilt: 2016,
         featured: false,
+        lat: 39.9526,
+        lng: -75.1652,
     },
 ];
 
