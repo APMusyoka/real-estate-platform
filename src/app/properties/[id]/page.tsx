@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Input } from '@/components';
+import { Button, Input, Lightbox } from '@/components';
+import { useFavorites } from '@/hooks/useFavorites';
 import { allProperties } from '@/data/allProperties';
 import { notFound } from 'next/navigation';
 
@@ -11,10 +12,15 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     const property = allProperties.find((p) => p.id === params.id);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [showContactForm, setShowContactForm] = useState(false);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
+    const { toggleFavorite, isFavorite } = useFavorites();
 
     if (!property) {
         notFound();
     }
+
+    const favorited = isFavorite(property.id);
 
     // Mock additional images (in real app, these would come from the property data)
     const images = [
@@ -54,6 +60,11 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
         .filter((p) => p.id !== property.id && p.city === property.city)
         .slice(0, 3);
 
+    const openLightbox = (index: number) => {
+        setLightboxIndex(index);
+        setIsLightboxOpen(true);
+    };
+
     return (
         <div className="min-h-screen bg-white">
             {/* Navigation */}
@@ -83,11 +94,23 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                 </div>
             </nav>
 
+            {/* Lightbox */}
+            <Lightbox
+                images={images}
+                initialIndex={lightboxIndex}
+                isOpen={isLightboxOpen}
+                onClose={() => setIsLightboxOpen(false)}
+                title={property.title}
+            />
+
             {/* Image Gallery */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {/* Main Image */}
-                    <div className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden group">
+                    <button
+                        onClick={() => openLightbox(activeImageIndex)}
+                        className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden group cursor-zoom-in"
+                    >
                         <Image
                             src={images[activeImageIndex]}
                             alt={property.title}
@@ -98,22 +121,42 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                         <div className={`absolute top-4 right-4 ${statusColors[property.status]} text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider`}>
                             {statusLabels[property.status]}
                         </div>
-                        <button className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-colors">
-                            <svg className="w-6 h-6 text-[rgb(var(--color-neutral-700))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleFavorite(property.id);
+                            }}
+                            className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-all ${favorited ? 'scale-110' : ''
+                                }`}
+                        >
+                            <svg
+                                className={`w-6 h-6 transition-colors ${favorited ? 'text-red-500 fill-red-500' : 'text-[rgb(var(--color-neutral-700))]'
+                                    }`}
+                                fill={favorited ? 'currentColor' : 'none'}
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
                         </button>
-                    </div>
+                        {/* Zoom indicator on hover */}
+                        <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                            Click to view full size
+                        </div>
+                    </button>
 
                     {/* Thumbnail Grid */}
                     <div className="grid grid-cols-3 gap-4">
                         {images.slice(0, 3).map((img, index) => (
                             <button
                                 key={index}
-                                onClick={() => setActiveImageIndex(index)}
-                                className={`relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden border-4 transition-all ${activeImageIndex === index
-                                        ? 'border-[rgb(var(--color-primary-500))]'
-                                        : 'border-transparent hover:border-[rgb(var(--color-neutral-300))]'
+                                onClick={() => {
+                                    setActiveImageIndex(index);
+                                    openLightbox(index);
+                                }}
+                                className={`relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden border-4 transition-all cursor-pointer ${activeImageIndex === index
+                                    ? 'border-[rgb(var(--color-primary-500))]'
+                                    : 'border-transparent hover:border-[rgb(var(--color-neutral-300))]'
                                     }`}
                             >
                                 <Image
@@ -124,7 +167,10 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                                 />
                             </button>
                         ))}
-                        <button className="relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden bg-gradient-to-br from-[rgb(var(--color-primary-100))] to-[rgb(var(--color-primary-200))] flex items-center justify-center hover:from-[rgb(var(--color-primary-200))] hover:to-[rgb(var(--color-primary-300))] transition-all">
+                        <button
+                            onClick={() => openLightbox(0)}
+                            className="relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden bg-gradient-to-br from-[rgb(var(--color-primary-100))] to-[rgb(var(--color-primary-200))] flex items-center justify-center hover:from-[rgb(var(--color-primary-200))] hover:to-[rgb(var(--color-primary-300))] transition-all"
+                        >
                             <div className="text-center">
                                 <svg className="w-8 h-8 text-[rgb(var(--color-primary-600))] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
