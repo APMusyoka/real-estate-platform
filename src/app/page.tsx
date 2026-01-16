@@ -1,9 +1,39 @@
+'use client';
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button, PropertyCard } from "@/components";
 import { featuredProperties, propertyTypes } from "@/data/mockData";
 
 export default function Home() {
+  const router = useRouter();
+  const [searchType, setSearchType] = useState('All Types');
+  const [searchLocation, setSearchLocation] = useState('');
+
+  const handleSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (searchType && searchType !== 'All Types') {
+      params.set('type', searchType);
+    }
+    if (searchLocation.trim()) {
+      params.set('search', searchLocation.trim());
+    }
+
+    // Navigate to properties page with search params
+    router.push(`/properties?${params.toString()}`);
+  };
+
+  const handleQuickFilter = (filterType: string, filterValue: string) => {
+    const params = new URLSearchParams();
+    params.set(filterType, filterValue);
+    router.push(`/properties?${params.toString()}`);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -69,13 +99,17 @@ export default function Home() {
           </div>
 
           {/* Search Box */}
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
+          <form onSubmit={handleSearch} className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="md:col-span-1">
                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                   Property Type
                 </label>
-                <select className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all">
+                <select
+                  value={searchType}
+                  onChange={(e) => setSearchType(e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
+                >
                   <option>All Types</option>
                   <option>House</option>
                   <option>Apartment</option>
@@ -96,6 +130,8 @@ export default function Home() {
                   <input
                     type="text"
                     placeholder="Enter city, neighborhood, or ZIP"
+                    value={searchLocation}
+                    onChange={(e) => setSearchLocation(e.target.value)}
                     className="w-full pl-12 pr-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
                   />
                 </div>
@@ -105,7 +141,7 @@ export default function Home() {
                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                   &nbsp;
                 </label>
-                <Button variant="primary" className="w-full h-[52px]">
+                <Button variant="primary" type="submit" className="w-full h-[52px]">
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -116,20 +152,36 @@ export default function Home() {
 
             {/* Quick Filters */}
             <div className="flex flex-wrap gap-3 mt-6 pt-6 border-t border-[rgb(var(--color-neutral-200))]">
-              <button className="px-4 py-2 rounded-full bg-[rgb(var(--color-primary-50))] text-[rgb(var(--color-primary-700))] text-sm font-medium hover:bg-[rgb(var(--color-primary-100))] transition-colors">
+              <button
+                type="button"
+                onClick={() => handleQuickFilter('status', 'for-sale')}
+                className="px-4 py-2 rounded-full bg-[rgb(var(--color-primary-50))] text-[rgb(var(--color-primary-700))] text-sm font-medium hover:bg-[rgb(var(--color-primary-100))] transition-colors"
+              >
                 For Sale
               </button>
-              <button className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors">
+              <button
+                type="button"
+                onClick={() => handleQuickFilter('status', 'for-rent')}
+                className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors"
+              >
                 For Rent
               </button>
-              <button className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors">
+              <button
+                type="button"
+                onClick={() => handleQuickFilter('priceRange', '500k-1m')}
+                className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors"
+              >
                 $500k - $1M
               </button>
-              <button className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors">
+              <button
+                type="button"
+                onClick={() => handleQuickFilter('bedrooms', '3')}
+                className="px-4 py-2 rounded-full bg-[rgb(var(--color-neutral-100))] text-[rgb(var(--color-neutral-700))] text-sm font-medium hover:bg-[rgb(var(--color-neutral-200))] transition-colors"
+              >
                 3+ Bedrooms
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </section>
 

@@ -1,17 +1,51 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Button, PropertyCard } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
 export default function PropertiesPage() {
+    const searchParams = useSearchParams();
+
+    // Initialize state from URL parameters
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCity, setSelectedCity] = useState('All Cities');
     const [selectedType, setSelectedType] = useState('All Types');
     const [selectedPriceRange, setSelectedPriceRange] = useState(0);
     const [sortBy, setSortBy] = useState('newest');
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+    // Read URL parameters on mount
+    useEffect(() => {
+        const search = searchParams.get('search');
+        const type = searchParams.get('type');
+        const city = searchParams.get('city');
+        const status = searchParams.get('status');
+        const bedrooms = searchParams.get('bedrooms');
+        const priceRange = searchParams.get('priceRange');
+
+        if (search) setSearchTerm(search);
+        if (type) setSelectedType(type);
+        if (city) setSelectedCity(city);
+
+        // Handle price range filtering
+        if (priceRange === '500k-1m') {
+            setSelectedPriceRange(2); // Index for $500k - $1M
+        }
+
+        // Handle bedroom filtering
+        if (bedrooms) {
+            setSearchTerm(prev => prev ? `${prev} ${bedrooms}+ bed` : `${bedrooms}+ bedrooms`);
+        }
+
+        // Handle status filtering
+        if (status) {
+            // Filter by status in the search term for now
+            setSearchTerm(prev => prev ? `${prev} ${status}` : status);
+        }
+    }, [searchParams]);
 
     // Filter and sort properties
     const filteredProperties = useMemo(() => {
@@ -227,8 +261,8 @@ export default function PropertiesPage() {
                                 <button
                                     onClick={() => setViewMode('grid')}
                                     className={`p-2 rounded-md transition-all ${viewMode === 'grid'
-                                            ? 'bg-white text-[rgb(var(--color-primary-500))] shadow-sm'
-                                            : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
+                                        ? 'bg-white text-[rgb(var(--color-primary-500))] shadow-sm'
+                                        : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
                                         }`}
                                 >
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,8 +272,8 @@ export default function PropertiesPage() {
                                 <button
                                     onClick={() => setViewMode('list')}
                                     className={`p-2 rounded-md transition-all ${viewMode === 'list'
-                                            ? 'bg-white text-[rgb(var(--color-primary-500))] shadow-sm'
-                                            : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
+                                        ? 'bg-white text-[rgb(var(--color-primary-500))] shadow-sm'
+                                        : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
                                         }`}
                                 >
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
