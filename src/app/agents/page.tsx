@@ -1,0 +1,246 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components';
+import { agents, agentSpecialties } from '@/data/agents';
+
+export default function AgentsPage() {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedSpecialty, setSelectedSpecialty] = useState('All Specialties');
+    const [sortBy, setSortBy] = useState('experience');
+
+    // Filter and sort agents
+    const filteredAgents = useMemo(() => {
+        let filtered = agents.filter((agent) => {
+            const matchesSearch = agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                agent.bio.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const matchesSpecialty = selectedSpecialty === 'All Specialties' ||
+                agent.specialties.includes(selectedSpecialty);
+
+            return matchesSearch && matchesSpecialty;
+        });
+
+        // Sort
+        switch (sortBy) {
+            case 'experience':
+                filtered.sort((a, b) => b.yearsExperience - a.yearsExperience);
+                break;
+            case 'rating':
+                filtered.sort((a, b) => b.rating - a.rating);
+                break;
+            case 'listings':
+                filtered.sort((a, b) => b.activeListings - a.activeListings);
+                break;
+            case 'name':
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+        }
+
+        return filtered;
+    }, [searchTerm, selectedSpecialty, sortBy]);
+
+    return (
+        <div className="min-h-screen bg-white">
+            {/* Navigation */}
+            <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-[rgb(var(--color-neutral-200))]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-20">
+                        <Link href="/" className="flex items-center gap-2">
+                            <div className="w-10 h-10 bg-gradient-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] rounded-lg flex items-center justify-center">
+                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                </svg>
+                            </div>
+                            <span className="text-xl font-bold text-[rgb(var(--color-neutral-900))]" style={{ fontFamily: 'var(--font-display)' }}>
+                                EstateHub
+                            </span>
+                        </Link>
+
+                        <div className="hidden md:flex items-center gap-8">
+                            <Link href="/properties" className="text-[rgb(var(--color-neutral-700))] hover:text-[rgb(var(--color-primary-500))] font-medium transition-colors">
+                                Properties
+                            </Link>
+                            <Link href="/agents" className="text-[rgb(var(--color-primary-500))] font-medium">
+                                Agents
+                            </Link>
+                            <Link href="/about" className="text-[rgb(var(--color-neutral-700))] hover:text-[rgb(var(--color-primary-500))] font-medium transition-colors">
+                                About
+                            </Link>
+                            <Link href="/contact" className="text-[rgb(var(--color-neutral-700))] hover:text-[rgb(var(--color-primary-500))] font-medium transition-colors">
+                                Contact
+                            </Link>
+                        </div>
+
+                        <Button variant="primary" size="sm">
+                            List Property
+                        </Button>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Page Header */}
+            <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+                        Meet Our Agents
+                    </h1>
+                    <p className="text-xl text-[rgb(var(--color-primary-100))] max-w-2xl">
+                        Connect with experienced real estate professionals dedicated to helping you find your perfect home
+                    </p>
+                </div>
+            </section>
+
+            {/* Filters & Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                {/* Filters */}
+                <div className="mb-8 bg-[rgb(var(--color-neutral-50))] rounded-2xl p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        {/* Search */}
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
+                                Search Agents
+                            </label>
+                            <div className="relative">
+                                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                <input
+                                    type="text"
+                                    placeholder="Search by name or expertise..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Specialty Filter */}
+                        <div>
+                            <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
+                                Specialty
+                            </label>
+                            <select
+                                value={selectedSpecialty}
+                                onChange={(e) => setSelectedSpecialty(e.target.value)}
+                                className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
+                            >
+                                {agentSpecialties.map((specialty) => (
+                                    <option key={specialty} value={specialty}>{specialty}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Sort */}
+                        <div>
+                            <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
+                                Sort By
+                            </label>
+                            <select
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
+                            >
+                                <option value="experience">Experience</option>
+                                <option value="rating">Rating</option>
+                                <option value="listings">Active Listings</option>
+                                <option value="name">Name (A-Z)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="mt-4 text-sm text-[rgb(var(--color-neutral-600))]">
+                        Showing <span className="font-semibold text-[rgb(var(--color-primary-600))]">{filteredAgents.length}</span> agents
+                    </div>
+                </div>
+
+                {/* Agents Grid */}
+                {filteredAgents.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredAgents.map((agent) => (
+                            <Link href={`/agents/${agent.id}`} key={agent.id}>
+                                <div className="group bg-white border border-[rgb(var(--color-neutral-200))] rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                                    {/* Agent Photo */}
+                                    <div className="relative h-80 overflow-hidden">
+                                        <Image
+                                            src={agent.image}
+                                            alt={agent.name}
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                                        {/* Rating Badge */}
+                                        <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center gap-1 shadow-md">
+                                            <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                            </svg>
+                                            <span className="text-sm font-semibold text-[rgb(var(--color-neutral-900))]">{agent.rating}</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Agent Info */}
+                                    <div className="p-6">
+                                        <h3 className="text-xl font-bold text-[rgb(var(--color-neutral-900))] mb-1">
+                                            {agent.name}
+                                        </h3>
+                                        <p className="text-sm text-[rgb(var(--color-primary-600))] font-medium mb-3">
+                                            {agent.role}
+                                        </p>
+
+                                        {/* Specialties */}
+                                        <div className="flex flex-wrap gap-2 mb-4">
+                                            {agent.specialties.slice(0, 2).map((specialty) => (
+                                                <span
+                                                    key={specialty}
+                                                    className="px-3 py-1 bg-[rgb(var(--color-primary-50))] text-[rgb(var(--color-primary-700))] text-xs font-medium rounded-full"
+                                                >
+                                                    {specialty}
+                                                </span>
+                                            ))}
+                                        </div>
+
+                                        {/* Stats */}
+                                        <div className="grid grid-cols-3 gap-4 py-4 border-t border-[rgb(var(--color-neutral-200))]">
+                                            <div className="text-center">
+                                                <div className="text-lg font-bold text-[rgb(var(--color-neutral-900))]">{agent.yearsExperience}</div>
+                                                <div className="text-xs text-[rgb(var(--color-neutral-600))]">Years</div>
+                                            </div>
+                                            <div className="text-center border-x border-[rgb(var(--color-neutral-200))]">
+                                                <div className="text-lg font-bold text-[rgb(var(--color-neutral-900))]">{agent.propertiesSold}</div>
+                                                <div className="text-xs text-[rgb(var(--color-neutral-600))]">Sold</div>
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="text-lg font-bold text-[rgb(var(--color-neutral-900))]">{agent.activeListings}</div>
+                                                <div className="text-xs text-[rgb(var(--color-neutral-600))]">Active</div>
+                                            </div>
+                                        </div>
+
+                                        {/* Contact Button */}
+                                        <Button variant="primary" className="w-full">
+                                            View Profile
+                                        </Button>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-16">
+                        <svg className="w-16 h-16 mx-auto text-[rgb(var(--color-neutral-400))] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h3 className="text-xl font-semibold text-[rgb(var(--color-neutral-900))] mb-2">
+                            No agents found
+                        </h3>
+                        <p className="text-[rgb(var(--color-neutral-600))]">
+                            Try adjusting your search or filters
+                        </p>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
