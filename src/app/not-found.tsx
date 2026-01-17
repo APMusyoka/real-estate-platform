@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components';
+import { Home, Search } from 'lucide-react';
 
 export default function NotFound() {
     return (
@@ -11,9 +12,7 @@ export default function NotFound() {
                         404
                     </div>
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <svg className="w-32 h-32 md:w-40 md:h-40 text-[rgb(var(--color-primary-400))] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
+                        <Home className="w-32 h-32 md:w-40 md:h-40 text-[rgb(var(--color-primary-400))] opacity-50" />
                     </div>
                 </div>
 
@@ -29,17 +28,13 @@ export default function NotFound() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/">
                         <Button variant="primary" size="lg">
-                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
+                            <Home className="w-5 h-5 mr-2" />
                             Go Home
                         </Button>
                     </Link>
                     <Link href="/properties">
                         <Button variant="secondary" size="lg">
-                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                            <Search className="w-5 h-5 mr-2" />
                             Browse Properties
                         </Button>
                     </Link>

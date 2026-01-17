@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Navigation, Footer } from '@/components';
+import { Search, Star, Users, ChevronDown } from 'lucide-react';
 import { agents, agentSpecialties } from '@/data/agents';
 
 export default function AgentsPage() {
@@ -69,9 +70,7 @@ export default function AgentsPage() {
                                 Search Agents
                             </label>
                             <div className="relative">
-                                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" />
                                 <input
                                     type="text"
                                     placeholder="Search by name or expertise..."
@@ -87,15 +86,18 @@ export default function AgentsPage() {
                             <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                 Specialty
                             </label>
-                            <select
-                                value={selectedSpecialty}
-                                onChange={(e) => setSelectedSpecialty(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
-                            >
-                                {agentSpecialties.map((specialty) => (
-                                    <option key={specialty} value={specialty}>{specialty}</option>
-                                ))}
-                            </select>
+                            <div className="relative">
+                                <select
+                                    value={selectedSpecialty}
+                                    onChange={(e) => setSelectedSpecialty(e.target.value)}
+                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white appearance-none"
+                                >
+                                    {agentSpecialties.map((specialty) => (
+                                        <option key={specialty} value={specialty}>{specialty}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
+                            </div>
                         </div>
 
                         {/* Sort */}
@@ -103,16 +105,19 @@ export default function AgentsPage() {
                             <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                 Sort By
                             </label>
-                            <select
-                                value={sortBy}
-                                onChange={(e) => setSortBy(e.target.value)}
-                                className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
-                            >
-                                <option value="experience">Experience</option>
-                                <option value="rating">Rating</option>
-                                <option value="listings">Active Listings</option>
-                                <option value="name">Name (A-Z)</option>
-                            </select>
+                            <div className="relative">
+                                <select
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white appearance-none"
+                                >
+                                    <option value="experience">Experience</option>
+                                    <option value="rating">Rating</option>
+                                    <option value="listings">Active Listings</option>
+                                    <option value="name">Name (A-Z)</option>
+                                </select>
+                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
+                            </div>
                         </div>
                     </div>
 
@@ -139,9 +144,7 @@ export default function AgentsPage() {
 
                                         {/* Rating Badge */}
                                         <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 flex items-center gap-1 shadow-md">
-                                            <svg className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                            </svg>
+                                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
                                             <span className="text-sm font-semibold text-[rgb(var(--color-neutral-900))]">{agent.rating}</span>
                                         </div>
                                     </div>
@@ -194,9 +197,7 @@ export default function AgentsPage() {
                     </div>
                 ) : (
                     <div className="text-center py-16">
-                        <svg className="w-16 h-16 mx-auto text-[rgb(var(--color-neutral-400))] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+                        <Users className="w-16 h-16 mx-auto text-[rgb(var(--color-neutral-400))] mb-4" />
                         <h3 className="text-xl font-semibold text-[rgb(var(--color-neutral-900))] mb-2">
                             No agents found
                         </h3>
