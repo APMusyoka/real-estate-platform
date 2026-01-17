@@ -1,27 +1,50 @@
 # EstateHub - Real Estate Platform
 
-A modern, high-performance real estate listing platform designed for seamless property search, virtual tours, and agent connections. Built with the latest web technologies for a premium user experience.
-
-![EstateHub Preview](public/file.svg)
+**EstateHub** is a clean, modern, and high-performance real estate listing application. It allows users to browse properties, filter by criteria, view detailed galleries, and contact agents. Built with a focus on code quality, responsiveness, and premium aesthetics using **Next.js 16** and **Tailwind CSS v4**.
 
 ## 🚀 Key Features
 
-*   **🏠 Advanced Property Listings**: Comprehensive catalog with sorting, filtering, and responsive grid/list views.
-*   **❤️ Smart Favorites**: Global favorites system with persistent state, allowing users to save and manage properties across the application.
-*   **🗺️ Interactive Maps**: Integrated **Leaflet** maps for property locations and office contact details, optimized for performance (no API keys required).
-*   **📱 Fully Responsive**: extensively tested on mobile, tablet, and desktop, with custom stackable layouts for smaller screens.
-*   **📸 Immersive Galleries**: High-quality property image lightboxes with zoom capabilities.
-*   **💰 Mortgage Calculator**: Real-time monthly payment estimation tool.
-*   **🎨 Custom Design System**: Polished UI with custom `Select` components, Tailwind v4 styling, and smooth animations.
+*   **🏠 Advanced Listings**: Dynamic property catalog with grid/list view toggles, sorting, and responsive layouts.
+*   **❤️ Smart Favorites**: Global state management (Context API) allows users to persist favorite properties across sessions.
+*   **🗺️ Interactive Maps**: Features fully functional **Leaflet** maps for property locations and contact pages, dynamically loaded for performance.
+*   **📱 Mobile-First Design**: Meticulously crafted for all devices, featuring stackable headers, touch-friendly touch targets, and adaptive grids.
+*   **📸 Rich Media**: Immersive property galleries with lightbox support and smooth transitions.
+*   **💰 Mortgage Calculator**: Built-in financial tool for real-time payment estimation.
+*   **🎨 Custom UI Kit**: Includes accessible custom `Select` dropdowns, badges, and notification toasts.
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & Tools
 
-*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router & Turbopack)
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+*   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (using `bg-linear-to-r`, `shrink-0`, etc.)
 *   **Language**: TypeScript
-*   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-*   **Icons**: Lucide React
-*   **Maps**: React Leaflet / Leaflet
-*   **State Management**: React Context API (Favorites, Toast Notifications)
+*   **Icons**: [Lucide React](https://lucide.dev/)
+*   **Maps**: Leaflet / React Leaflet
+*   **State Management**: React Context + LocalStorage
+*   **Font**: Geist Sans & Mono
+
+## 📂 Project Structure
+
+A quick guide to navigating the codebase:
+
+```
+src/
+├── app/                  # Next.js App Router pages
+│   ├── properties/       # Property listing & id-based detail pages
+│   ├── favorites/        # User favorites page
+│   ├── contact/          # Contact page with Map integration
+│   ├── not-found.tsx     # Custom 404 page
+│   └── layout.tsx        # Root layout with Context Providers
+├── components/           # Reusable UI components
+│   ├── PropertyCard.tsx  # Main listing card (Grid/List variants)
+│   ├── PropertyMap.tsx   # Leaflet map wrapper
+│   ├── Select.tsx        # Custom accessible dropdown
+│   └── ...
+├── context/              # Global state management
+│   ├── FavoritesContext  # Logic for saving/persisting favorites
+│   └── ToastContext      # Notification system
+├── data/                 # Mock data (Properties, Agents)
+└── hooks/                # Custom React hooks
+```
 
 ## 📋 Getting Started
 
@@ -41,21 +64,23 @@ A modern, high-performance real estate listing platform designed for seamless pr
     npm run dev
     ```
 
-4.  **Open usage:**
-    Visit [http://localhost:3000](http://localhost:3000) to view the application.
+4.  **Explore:**
+    Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 ## 📚 Documentation
 
-For detailed insights into the project structure and development decisions, refer to the [docs](./docs/) folder:
+Detailed documentation is available in the [`docs/`](./docs/) directory:
 
-*   [Developer Thoughts & Architecture](./docs/05-developer-thoughts.md)
-*   [Key Features](./docs/02-key-features.md)
-*   [Design System](./docs/03-design-system.md)
+*   [**Developer Notes**](./docs/05-developer-thoughts.md): Analysis of architecture, recent refactors, and future recommendations.
+*   [**Features**](./docs/02-key-features.md): Breakdown of functionality.
+*   [**Design System**](./docs/03-design-system.md): UI/UX guidelines.
 
 ## 💼 Project Status
 
-This project is currently in the **Polishing Phase**. Core features are implemented, responsive design is finalized, and code quality has been upgraded to modern standards.
+*   **Current State**: Polished Prototype / Beta.
+*   **Ready For**: Backend integration (e.g., Strapi, Sanity, or Supabase).
+*   **Recent Updates**: Migrated to Tailwind v4, fixed hydration issues, and implemented global favorites state.
 
 ---
 
-Built with ❤️ for real estate professionals.
+*Built with ❤️ for the Modern Web.*
