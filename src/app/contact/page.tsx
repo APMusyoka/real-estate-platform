@@ -2,8 +2,19 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { Button, Input, Navigation, Footer, Select } from '@/components';
-import { Phone, Mail, MapPin, Share2, Facebook, Twitter, Instagram, Linkedin, Send, Map } from 'lucide-react';
+import { Phone, Mail, MapPin, Share2, Facebook, Twitter, Instagram, Linkedin, Send, Map as MapIcon } from 'lucide-react';
+
+// Dynamically import map to avoid SSR issues
+const PropertyMap = dynamic(() => import('@/components/PropertyMap'), {
+    ssr: false,
+    loading: () => (
+        <div className="h-96 w-full bg-[rgb(var(--color-neutral-200))] rounded-2xl flex items-center justify-center animate-pulse">
+            <MapIcon className="w-12 h-12 text-[rgb(var(--color-neutral-400))]" />
+        </div>
+    )
+});
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -193,13 +204,14 @@ export default function ContactPage() {
             {/* Map Section */}
             <section className="bg-[rgb(var(--color-neutral-100))] py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-[rgb(var(--color-neutral-300))] rounded-2xl h-96 flex items-center justify-center">
-                        <div className="text-center text-[rgb(var(--color-neutral-600))]">
-                            <Map className="w-16 h-16 mx-auto mb-4" />
-                            <p className="text-lg font-medium">Map Location</p>
-                            <p className="text-sm">123 Real Estate Blvd, San Francisco, CA</p>
-                        </div>
-                    </div>
+                    <PropertyMap
+                        lat={37.7749}
+                        lng={-122.4194}
+                        title="EstateHub HQ"
+                        address="123 Real Estate Blvd, San Francisco, CA 94102"
+                        height="450px"
+                        zoom={14}
+                    />
                 </div>
             </section>
             <Footer />
