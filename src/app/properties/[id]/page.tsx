@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, use } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -16,8 +16,10 @@ const PropertyMap = dynamic(() => import('@/components/PropertyMap'), {
     loading: () => <div className="h-[400px] bg-[rgb(var(--color-neutral-100))] rounded-2xl flex items-center justify-center">Loading map...</div>
 });
 
-export default function PropertyDetailPage({ params }: { params: { id: string } }) {
-    const property = allProperties.find((p) => p.id === params.id);
+export default function PropertyDetailPage({ params }: { params: Promise<{ id: string }> }) {
+    // Unwrap the params Promise (Next.js 15+)
+    const { id } = use(params);
+    const property = allProperties.find((p) => p.id === id);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [showContactForm, setShowContactForm] = useState(false);
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
