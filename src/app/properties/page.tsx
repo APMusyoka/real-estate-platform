@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Search, LayoutGrid, List, SearchX } from 'lucide-react';
 import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
@@ -139,9 +139,7 @@ function PropertiesContent() {
                                     Search
                                 </label>
                                 <div className="relative">
-                                    <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" />
                                     <input
                                         type="text"
                                         placeholder="Search by title or address"
@@ -248,9 +246,7 @@ function PropertiesContent() {
                                         : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
                                         }`}
                                 >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                                    </svg>
+                                    <LayoutGrid className="w-5 h-5" />
                                 </button>
                                 <button
                                     onClick={() => setViewMode('list')}
@@ -259,9 +255,7 @@ function PropertiesContent() {
                                         : 'text-[rgb(var(--color-neutral-600))] hover:text-[rgb(var(--color-neutral-900))]'
                                         }`}
                                 >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
+                                    <List className="w-5 h-5" />
                                 </button>
                             </div>
                         </div>
@@ -279,9 +273,7 @@ function PropertiesContent() {
                             </div>
                         ) : (
                             <div className="text-center py-16">
-                                <svg className="w-16 h-16 mx-auto text-[rgb(var(--color-neutral-400))] mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <SearchX className="w-16 h-16 mx-auto text-[rgb(var(--color-neutral-400))] mb-4" />
                                 <h3 className="text-xl font-semibold text-[rgb(var(--color-neutral-900))] mb-2">
                                     No properties found
                                 </h3>

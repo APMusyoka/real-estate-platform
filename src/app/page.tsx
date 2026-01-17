@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { MapPin, Search, ArrowRight, ChevronDown } from "lucide-react";
 import { Button, PropertyCard, Navigation, Footer } from "@/components";
 import { featuredProperties, propertyTypes } from "@/data/mockData";
 
@@ -67,17 +68,20 @@ export default function Home() {
                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                   Property Type
                 </label>
-                <select
-                  value={searchType}
-                  onChange={(e) => setSearchType(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
-                >
-                  <option>All Types</option>
-                  <option>House</option>
-                  <option>Apartment</option>
-                  <option>Condo</option>
-                  <option>Villa</option>
-                </select>
+                <div className="relative">
+                  <select
+                    value={searchType}
+                    onChange={(e) => setSearchType(e.target.value)}
+                    className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none"
+                  >
+                    <option>All Types</option>
+                    <option>House</option>
+                    <option>Apartment</option>
+                    <option>Condo</option>
+                    <option>Villa</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
+                </div>
               </div>
 
               <div className="md:col-span-2">
@@ -85,10 +89,7 @@ export default function Home() {
                   Location
                 </label>
                 <div className="relative">
-                  <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+                  <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))]" />
                   <input
                     type="text"
                     placeholder="Enter city, neighborhood, or ZIP"
@@ -104,9 +105,7 @@ export default function Home() {
                   &nbsp;
                 </label>
                 <Button variant="primary" type="submit" className="w-full h-[52px]">
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
+                  <Search className="w-5 h-5 mr-2" />
                   Search
                 </Button>
               </div>
@@ -202,9 +201,7 @@ export default function Home() {
             <Link href="/properties">
               <Button variant="ghost">
                 View All
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </Link>
           </div>
