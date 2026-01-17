@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
+export const dynamic = 'force-dynamic';
+
 export default function PropertiesPage() {
     const searchParams = useSearchParams();
 
