@@ -255,7 +255,7 @@ export default function MortgageCalculator({ defaultPrice = 500000, compact = fa
 
                 {/* Results */}
                 <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] rounded-2xl p-8 text-white">
+                    <div className="bg-linear-to-br from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] rounded-2xl p-8 text-white">
                         <h3 className="text-lg font-medium mb-2 opacity-90">Monthly Payment</h3>
                         <div className="text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-mono)' }}>
                             {formatCurrency(monthlyPayment)}

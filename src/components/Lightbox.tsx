@@ -50,7 +50,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose, ti
 
     return (
         <div
-            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center"
+            className="fixed inset-0 z-9999 bg-black/95 flex items-center justify-center"
             onClick={onClose}
         >
             {/* Close Button */}
@@ -129,7 +129,7 @@ export default function Lightbox({ images, initialIndex = 0, isOpen, onClose, ti
                                 e.stopPropagation();
                                 setCurrentIndex(index);
                             }}
-                            className={`relative flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${index === currentIndex
+                            className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${index === currentIndex
                                 ? 'border-white scale-110'
                                 : 'border-white/30 hover:border-white/60'
                                 }`}

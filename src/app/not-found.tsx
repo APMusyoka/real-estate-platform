@@ -4,11 +4,11 @@ import { Home, Search } from 'lucide-react';
 
 export default function NotFound() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[rgb(var(--color-primary-50))] via-white to-[rgb(var(--color-secondary-50))] flex items-center justify-center px-4">
+        <div className="min-h-screen bg-linear-to-br from-[rgb(var(--color-primary-50))] via-white to-[rgb(var(--color-secondary-50))] flex items-center justify-center px-4">
             <div className="max-w-2xl mx-auto text-center">
                 {/* 404 Illustration */}
                 <div className="relative mb-12">
-                    <div className="text-[200px] md:text-[280px] font-bold leading-none bg-gradient-to-br from-[rgb(var(--color-primary-300))] to-[rgb(var(--color-primary-100))] bg-clip-text text-transparent select-none" style={{ fontFamily: 'var(--font-display)' }}>
+                    <div className="text-[200px] md:text-[280px] font-bold leading-none bg-linear-to-br from-[rgb(var(--color-primary-300))] to-[rgb(var(--color-primary-100))] bg-clip-text text-transparent select-none" style={{ fontFamily: 'var(--font-display)' }}>
                         404
                     </div>
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

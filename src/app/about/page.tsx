@@ -73,7 +73,7 @@ export default function AboutPage() {
             <Navigation />
 
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <section className="relative bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-20 right-20 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
                     <div className="absolute bottom-20 left-20 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((value) => (
                             <div key={value.title} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-shadow">
-                                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] text-white flex items-center justify-center mb-6">
+                                <div className="w-16 h-16 rounded-lg bg-linear-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] text-white flex items-center justify-center mb-6">
                                     {value.icon}
                                 </div>
                                 <h3 className="text-xl font-bold text-[rgb(var(--color-neutral-900))] mb-3">
@@ -183,7 +183,7 @@ export default function AboutPage() {
                                         fill
                                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
                                 </div>
                                 <h3 className="text-xl font-bold text-[rgb(var(--color-neutral-900))] mb-1">
                                     {member.name}
@@ -198,7 +198,7 @@ export default function AboutPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
+            <section className="bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-display)' }}>
                         Ready to Get Started?

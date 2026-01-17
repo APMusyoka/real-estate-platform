@@ -36,7 +36,7 @@ export default function ContactPage() {
             <Navigation />
 
             {/* Hero Section */}
-            <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
+            <section className="bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto text-center">
                     <h1 className="text-5xl md:text-6xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-display)' }}>
                         Get in Touch
@@ -63,7 +63,7 @@ export default function ContactPage() {
                             <div className="space-y-6">
                                 {/* Phone */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-primary-50))] flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-primary-50))] flex items-center justify-center shrink-0">
                                         <Phone className="w-6 h-6 text-[rgb(var(--color-primary-600))]" />
                                     </div>
                                     <div>
@@ -75,7 +75,7 @@ export default function ContactPage() {
 
                                 {/* Email */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-secondary-50))] flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-secondary-50))] flex items-center justify-center shrink-0">
                                         <Mail className="w-6 h-6 text-[rgb(var(--color-secondary-600))]" />
                                     </div>
                                     <div>
@@ -87,7 +87,7 @@ export default function ContactPage() {
 
                                 {/* Address */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-warning))]/10 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-warning))]/10 flex items-center justify-center shrink-0">
                                         <MapPin className="w-6 h-6 text-[rgb(var(--color-warning))]" />
                                     </div>
                                     <div>
@@ -99,7 +99,7 @@ export default function ContactPage() {
 
                                 {/* Social */}
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-info))]/10 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-12 h-12 rounded-lg bg-[rgb(var(--color-info))]/10 flex items-center justify-center shrink-0">
                                         <Share2 className="w-6 h-6 text-[rgb(var(--color-info))]" />
                                     </div>
                                     <div>

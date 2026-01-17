@@ -42,7 +42,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--color-primary-50))] via-white to-[rgb(var(--color-secondary-50))] opacity-60"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-[rgb(var(--color-primary-50))] via-white to-[rgb(var(--color-secondary-50))] opacity-60"></div>
 
         {/* Mesh Gradient Effect */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[rgb(var(--color-primary-200))] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto mb-12">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[rgb(var(--color-neutral-900))] mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
               Find Your Dream Home{" "}
-              <span className="bg-gradient-to-r from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] bg-clip-text text-transparent">
                 Today
               </span>
             </h1>
@@ -144,7 +144,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))]">
+      <section className="py-16 bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -233,7 +233,7 @@ export default function Home() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-2xl font-bold mb-1">{type.name}</h3>
                     <p className="text-white/90">{type.count} properties</p>
@@ -246,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-800))] relative overflow-hidden">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-800))] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>

@@ -51,7 +51,7 @@ export default function ToastItem({ toast, onClose }: ToastItemProps) {
         backdrop-blur-sm
       `}
         >
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
                 {icons[toast.type]}
             </div>
             <p className="flex-1 text-sm font-medium">
@@ -59,7 +59,7 @@ export default function ToastItem({ toast, onClose }: ToastItemProps) {
             </p>
             <button
                 onClick={() => onClose(toast.id)}
-                className="flex-shrink-0 hover:opacity-75 transition-opacity"
+                className="shrink-0 hover:opacity-75 transition-opacity"
                 aria-label="Close notification"
             >
                 <X className="w-4 h-4" />

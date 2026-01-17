@@ -26,11 +26,11 @@ export default function AgentProfilePage({ params }: { params: Promise<{ id: str
             <Navigation />
 
             {/* Agent Header */}
-            <section className="relative bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
+            <section className="relative bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                         {/* Agent Photo */}
-                        <div className="relative w-48 h-48 rounded-2xl overflow-hidden ring-4 ring-white shadow-2xl flex-shrink-0">
+                        <div className="relative w-48 h-48 rounded-2xl overflow-hidden ring-4 ring-white shadow-2xl shrink-0">
                             <Image
                                 src={agent.image}
                                 alt={agent.name}
