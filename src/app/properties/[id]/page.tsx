@@ -141,7 +141,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
                     </div>
 
                     {/* Thumbnail Grid */}
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {images.slice(0, 3).map((img, index) => (
                             <button
                                 key={index}
@@ -164,7 +164,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
                         ))}
                         <button
                             onClick={() => openLightbox(0)}
-                            className="relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden bg-gradient-to-br from-[rgb(var(--color-primary-100))] to-[rgb(var(--color-primary-200))] flex items-center justify-center hover:from-[rgb(var(--color-primary-200))] hover:to-[rgb(var(--color-primary-300))] transition-all"
+                            className="relative h-[190px] lg:h-[290px] rounded-xl overflow-hidden bg-linear-to-br from-[rgb(var(--color-primary-100))] to-[rgb(var(--color-primary-200))] flex items-center justify-center hover:from-[rgb(var(--color-primary-200))] hover:to-[rgb(var(--color-primary-300))] transition-all"
                         >
                             <div className="text-center">
                                 <Maximize className="w-8 h-8 text-[rgb(var(--color-primary-600))] mx-auto mb-2" />
@@ -181,18 +181,18 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
                     {/* Main Content */}
                     <div className="lg:col-span-2">
                         <div className="mb-8">
-                            <div className="flex items-start justify-between mb-4">
+                            <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 gap-4">
                                 <div>
-                                    <h1 className="text-4xl font-bold text-[rgb(var(--color-neutral-900))] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+                                    <h1 className="text-3xl md:text-4xl font-bold text-[rgb(var(--color-neutral-900))] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
                                         {property.title}
                                     </h1>
-                                    <p className="text-lg text-[rgb(var(--color-neutral-600))] flex items-center gap-2">
-                                        <MapPin className="w-5 h-5" />
+                                    <p className="text-base md:text-lg text-[rgb(var(--color-neutral-600))] flex items-center gap-2">
+                                        <MapPin className="w-5 h-5 shrink-0" />
                                         {property.address}
                                     </p>
                                 </div>
-                                <div className="text-right">
-                                    <div className="text-4xl font-bold text-[rgb(var(--color-primary-700))] mb-1" style={{ fontFamily: 'var(--font-mono)' }}>
+                                <div className="text-left md:text-right">
+                                    <div className="text-3xl md:text-4xl font-bold text-[rgb(var(--color-primary-700))] mb-1" style={{ fontFamily: 'var(--font-mono)' }}>
                                         {formatPrice(property.price)}
                                     </div>
                                     <div className="text-sm text-[rgb(var(--color-neutral-600))]">
