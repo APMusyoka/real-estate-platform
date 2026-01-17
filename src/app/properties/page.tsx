@@ -124,7 +124,7 @@ function PropertiesContent() {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Filters Sidebar */}
                     <aside className="lg:w-80 flex-shrink-0">
-                        <div className="bg-white rounded-2xl p-6 shadow-md sticky top-28">
+                        <div className="bg-white rounded-2xl p-6 shadow-md sticky top-28 z-30">
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-xl font-bold text-[rgb(var(--color-neutral-900))]">Filters</h2>
                                 <button
