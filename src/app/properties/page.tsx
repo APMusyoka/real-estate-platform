@@ -6,7 +6,9 @@ import { useSearchParams } from 'next/navigation';
 import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
+// Disable static pre-rendering to allow useSearchParams
 export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 export default function PropertiesPage() {
     const searchParams = useSearchParams();
