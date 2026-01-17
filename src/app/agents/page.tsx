@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Navigation } from '@/components';
+import { Button, Navigation, Footer } from '@/components';
 import { agents, agentSpecialties } from '@/data/agents';
 
 export default function AgentsPage() {
@@ -206,6 +206,7 @@ export default function AgentsPage() {
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
     );
 }
