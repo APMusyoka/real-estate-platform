@@ -17,6 +17,7 @@ interface PropertyCardProps {
     sqft: number;
     image: string;
     status: 'for-sale' | 'for-rent' | 'sold' | 'pending' | 'new' | 'featured';
+    layout?: 'grid' | 'list';
 }
 
 export default function PropertyCard({
@@ -29,10 +30,12 @@ export default function PropertyCard({
     sqft,
     image,
     status,
+    layout = 'grid',
 }: PropertyCardProps) {
     const { toggleFavorite, isFavorite } = useFavorites();
     const { success } = useToast();
     const favorited = isFavorite(id);
+    const isList = layout === 'list';
 
     const handleFavoriteClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -68,14 +71,21 @@ export default function PropertyCard({
             style: 'currency',
             currency: 'USD',
             minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
         }).format(price);
     };
 
     return (
-        <Link href={`/properties/${id}`}>
-            <div className="group bg-white border border-[rgb(var(--color-neutral-200))] rounded-xl overflow-hidden transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(var(--color-primary-200))]">
+        <Link href={`/properties/${id}`} className="block h-full">
+            <div className={`
+                group bg-white border border-[rgb(var(--color-neutral-200))] rounded-xl overflow-hidden transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:border-[rgb(var(--color-primary-200))] h-full
+                ${isList ? 'flex flex-row' : ''}
+            `}>
                 {/* Image Container */}
-                <div className="relative h-64 overflow-hidden">
+                <div className={`
+                    relative overflow-hidden flex-shrink-0
+                    ${isList ? 'w-[120px] sm:w-[280px] h-auto' : 'h-64 w-full'}
+                `}>
                     <Image
                         src={image}
                         alt={title}
@@ -83,13 +93,13 @@ export default function PropertyCard({
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     {/* Status Badge */}
-                    <div className={`absolute top-4 right-4 ${statusColors[status]} text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider`}>
+                    <div className={`absolute top-4 right-4 ${statusColors[status]} text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${isList ? 'hidden sm:block' : ''}`}>
                         {statusLabels[status]}
                     </div>
                     {/* Favorite Button */}
                     <button
                         className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-all ${favorited ? 'scale-110' : ''
-                            }`}
+                            } ${isList ? 'scale-75 top-2 left-2 sm:scale-100 sm:top-4 sm:left-4' : ''}`}
                         onClick={handleFavoriteClick}
                         aria-label={favorited ? 'Remove from favorites' : 'Add to favorites'}
                     >
@@ -102,36 +112,38 @@ export default function PropertyCard({
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className={`
+                    ${isList ? 'flex-1 flex flex-col justify-center p-3 sm:p-6' : 'p-6'}
+                `}>
                     {/* Price */}
-                    <div className="text-3xl font-bold text-[rgb(var(--color-primary-700))] mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
+                    <div className="text-xl sm:text-3xl font-bold text-[rgb(var(--color-primary-700))] mb-1 sm:mb-2" style={{ fontFamily: 'var(--font-mono)' }}>
                         {formatPrice(price)}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-semibold text-[rgb(var(--color-neutral-900))] mb-2 line-clamp-1">
+                    <h3 className="text-base sm:text-xl font-semibold text-[rgb(var(--color-neutral-900))] mb-1 sm:mb-2 line-clamp-1">
                         {title}
                     </h3>
 
                     {/* Address */}
-                    <p className="text-[rgb(var(--color-neutral-600))] text-sm mb-4 flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {address}
+                    <p className="text-[rgb(var(--color-neutral-600))] text-xs sm:text-sm mb-2 sm:mb-4 flex items-center gap-1">
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                        <span className="line-clamp-1">{address}</span>
                     </p>
 
                     {/* Property Details */}
-                    <div className="flex items-center gap-4 text-sm text-[rgb(var(--color-neutral-600))]">
+                    <div className={`flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-[rgb(var(--color-neutral-600))] ${!isList ? 'pt-4 border-t border-[rgb(var(--color-neutral-100))] mt-auto' : ''}`}>
                         <div className="flex items-center gap-1">
-                            <Bed className="w-5 h-5" />
-                            <span className="font-medium">{bedrooms}</span> beds
+                            <Bed className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <span className="font-medium">{bedrooms}</span> <span className="hidden sm:inline">beds</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Bath className="w-5 h-5" />
-                            <span className="font-medium">{bathrooms}</span> baths
+                            <Bath className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <span className="font-medium">{bathrooms}</span> <span className="hidden sm:inline">baths</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <Maximize className="w-5 h-5" />
-                            <span className="font-medium">{sqft.toLocaleString()}</span> sqft
+                            <Maximize className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <span className="font-medium">{sqft.toLocaleString()}</span> <span className="hidden sm:inline">sqft</span>
                         </div>
                     </div>
                 </div>

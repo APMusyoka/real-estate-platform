@@ -52,7 +52,7 @@ export default function Footer() {
                             Subscribe to get the latest properties and news.
                         </p>
                     </div>
-                    <div className="flex flex-wrap gap-2 max-sm:w-full max-sm:justify-center">
+                    <div className="flex flex-wrap gap-2 max-sm:w-full max-sm:justify-center my-auto h-full">
                         <input
                             type="email"
                             placeholder="Your email"

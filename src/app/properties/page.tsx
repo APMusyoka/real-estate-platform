@@ -257,7 +257,7 @@ function PropertiesContent() {
                                     : 'flex flex-col gap-6'
                             }>
                                 {filteredProperties.map((property) => (
-                                    <PropertyCard key={property.id} {...property} />
+                                    <PropertyCard key={property.id} {...property} layout={viewMode} />
                                 ))}
                             </div>
                         ) : (
