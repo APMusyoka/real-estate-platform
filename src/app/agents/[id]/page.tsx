@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Input, PropertyCard } from '@/components';
+import { Button, Input, PropertyCard, Navigation } from '@/components';
 import { agents } from '@/data/agents';
 import { allProperties } from '@/data/allProperties';
 import { notFound } from 'next/navigation';
@@ -20,32 +20,7 @@ export default function AgentProfilePage({ params }: { params: { id: string } })
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Navigation */}
-            <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-[rgb(var(--color-neutral-200))]">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-20">
-                        <Link href="/" className="flex items-center gap-2">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] rounded-lg flex items-center justify-center">
-                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                            </div>
-                            <span className="text-xl font-bold text-[rgb(var(--color-neutral-900))]" style={{ fontFamily: 'var(--font-display)' }}>
-                                EstateHub
-                            </span>
-                        </Link>
-
-                        <Link href="/agents">
-                            <Button variant="ghost" size="sm">
-                                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                                </svg>
-                                Back to Agents
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
-            </nav>
+            <Navigation />
 
             {/* Agent Header */}
             <section className="relative bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-20 px-4 sm:px-6 lg:px-8">
