@@ -1,10 +1,15 @@
-'use client';
-
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { ChevronDown } from 'lucide-react';
 import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
+
+// Custom chevron for select inputs
+// const chevronDown = ... (Removed in favor of Lucide icon)
+
+// Reusable select styles (without background image)
+const selectClassName = "w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] bg-white text-[rgb(var(--color-neutral-900))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none cursor-pointer";
 
 // Component that uses useSearchParams - must be wrapped in Suspense
 function PropertiesContent() {
@@ -152,15 +157,18 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     City
                                 </label>
-                                <select
-                                    value={selectedCity}
-                                    onChange={(e) => setSelectedCity(e.target.value)}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
-                                >
-                                    {cities.map((city) => (
-                                        <option key={city} value={city}>{city}</option>
-                                    ))}
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={selectedCity}
+                                        onChange={(e) => setSelectedCity(e.target.value)}
+                                        className={`${selectClassName} pr-10`}
+                                    >
+                                        {cities.map((city) => (
+                                            <option key={city} value={city}>{city}</option>
+                                        ))}
+                                    </select>
+                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
+                                </div>
                             </div>
 
                             {/* Property Type */}
@@ -168,15 +176,18 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     Property Type
                                 </label>
-                                <select
-                                    value={selectedType}
-                                    onChange={(e) => setSelectedType(e.target.value)}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
-                                >
-                                    {propertyTypesFilter.map((type) => (
-                                        <option key={type} value={type}>{type}</option>
-                                    ))}
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={selectedType}
+                                        onChange={(e) => setSelectedType(e.target.value)}
+                                        className={`${selectClassName} pr-10`}
+                                    >
+                                        {propertyTypesFilter.map((type) => (
+                                            <option key={type} value={type}>{type}</option>
+                                        ))}
+                                    </select>
+                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
+                                </div>
                             </div>
 
                             {/* Price Range */}
@@ -184,15 +195,18 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     Price Range
                                 </label>
-                                <select
-                                    value={selectedPriceRange}
-                                    onChange={(e) => setSelectedPriceRange(Number(e.target.value))}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
-                                >
-                                    {priceRanges.map((range, index) => (
-                                        <option key={index} value={index}>{range.label}</option>
-                                    ))}
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={selectedPriceRange}
+                                        onChange={(e) => setSelectedPriceRange(Number(e.target.value))}
+                                        className={`${selectClassName} pr-10`}
+                                    >
+                                        {priceRanges.map((range, index) => (
+                                            <option key={index} value={index}>{range.label}</option>
+                                        ))}
+                                    </select>
+                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
+                                </div>
                             </div>
 
                             {/* Active Filters Count */}
@@ -210,16 +224,19 @@ function PropertiesContent() {
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                             <div className="flex items-center gap-4">
                                 <label className="text-sm font-medium text-[rgb(var(--color-neutral-700))]">Sort by:</label>
-                                <select
-                                    value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value)}
-                                    className="px-4 py-2 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white"
-                                >
-                                    <option value="newest">Newest First</option>
-                                    <option value="price-low">Price: Low to High</option>
-                                    <option value="price-high">Price: High to Low</option>
-                                    <option value="sqft">Square Footage</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        value={sortBy}
+                                        onChange={(e) => setSortBy(e.target.value)}
+                                        className="px-4 py-2 rounded-lg border border-[rgb(var(--color-neutral-300))] bg-white text-[rgb(var(--color-neutral-900))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none cursor-pointer pr-10"
+                                    >
+                                        <option value="newest">Newest First</option>
+                                        <option value="price-low">Price: Low to High</option>
+                                        <option value="price-high">Price: High to Low</option>
+                                        <option value="sqft">Square Footage</option>
+                                    </select>
+                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
+                                </div>
                             </div>
 
                             {/* View Toggle */}
