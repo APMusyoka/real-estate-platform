@@ -5,4 +5,5 @@ export { default as MortgageCalculator } from './MortgageCalculator';
 export { default as Lightbox } from './Lightbox';
 export { default as PropertyMap } from './PropertyMap';
 export { default as Navigation } from './Navigation';
+export { default as Footer } from './Footer';
 
