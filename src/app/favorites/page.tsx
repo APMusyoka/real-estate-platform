@@ -20,10 +20,10 @@ export default function FavoritesPage() {
             <Navigation />
 
             {/* Page Header */}
-            <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
+            <section className="bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex items-center justify-between">
-                        <div>
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 sm:gap-4">
+                        <div className="text-center sm:text-left">
                             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                                 My Favorites
                             </h1>
@@ -35,7 +35,7 @@ export default function FavoritesPage() {
                             <Button
                                 variant="secondary"
                                 onClick={clearAllFavorites}
-                                className="bg-white/20 text-white border-white hover:bg-white/30"
+                                className="bg-white/20 text-white border-white hover:bg-white/30 w-full sm:w-auto"
                             >
                                 Clear All
                             </Button>
