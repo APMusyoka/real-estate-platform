@@ -3,8 +3,8 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Navigation, Footer } from '@/components';
-import { Search, Star, Users, ChevronDown } from 'lucide-react';
+import { Button, Navigation, Footer, Select } from '@/components';
+import { Search, Star, Users } from 'lucide-react';
 import { agents, agentSpecialties } from '@/data/agents';
 
 export default function AgentsPage() {
@@ -49,11 +49,11 @@ export default function AgentsPage() {
 
             {/* Page Header */}
             <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto text-center lg:text-left">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                         Meet Our Agents
                     </h1>
-                    <p className="text-xl text-[rgb(var(--color-primary-100))] max-w-2xl">
+                    <p className="text-xl text-[rgb(var(--color-primary-100))] max-w-2xl mx-auto lg:mx-0">
                         Connect with experienced real estate professionals dedicated to helping you find your perfect home
                     </p>
                 </div>
@@ -86,18 +86,14 @@ export default function AgentsPage() {
                             <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                 Specialty
                             </label>
-                            <div className="relative">
-                                <select
-                                    value={selectedSpecialty}
-                                    onChange={(e) => setSelectedSpecialty(e.target.value)}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white appearance-none"
-                                >
-                                    {agentSpecialties.map((specialty) => (
-                                        <option key={specialty} value={specialty}>{specialty}</option>
-                                    ))}
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
-                            </div>
+                            <Select
+                                value={selectedSpecialty}
+                                onChange={(val) => setSelectedSpecialty(val as string)}
+                                options={[
+                                    { value: 'All Specialties', label: 'All Specialties' },
+                                    ...agentSpecialties.map(s => ({ value: s, label: s }))
+                                ]}
+                            />
                         </div>
 
                         {/* Sort */}
@@ -105,19 +101,16 @@ export default function AgentsPage() {
                             <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                 Sort By
                             </label>
-                            <div className="relative">
-                                <select
-                                    value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white appearance-none"
-                                >
-                                    <option value="experience">Experience</option>
-                                    <option value="rating">Rating</option>
-                                    <option value="listings">Active Listings</option>
-                                    <option value="name">Name (A-Z)</option>
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
-                            </div>
+                            <Select
+                                value={sortBy}
+                                onChange={(val) => setSortBy(val as string)}
+                                options={[
+                                    { value: 'experience', label: 'Experience' },
+                                    { value: 'rating', label: 'Rating' },
+                                    { value: 'listings', label: 'Active Listings' },
+                                    { value: 'name', label: 'Name (A-Z)' }
+                                ]}
+                            />
                         </div>
                     </div>
 

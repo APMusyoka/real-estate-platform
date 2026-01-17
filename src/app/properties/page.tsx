@@ -3,15 +3,15 @@
 import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { ChevronDown, Search, LayoutGrid, List, SearchX } from 'lucide-react';
-import { Button, PropertyCard, Navigation, Footer } from '@/components';
+import { Search, LayoutGrid, List, SearchX } from 'lucide-react';
+import { Button, PropertyCard, Navigation, Footer, Select } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
 // Custom chevron for select inputs
 // const chevronDown = ... (Removed in favor of Lucide icon)
 
 // Reusable select styles (without background image)
-const selectClassName = "w-full px-4 py-2.5 rounded-lg border border-[rgb(var(--color-neutral-300))] bg-white text-[rgb(var(--color-neutral-900))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none cursor-pointer";
+
 
 // Component that uses useSearchParams - must be wrapped in Suspense
 function PropertiesContent() {
@@ -110,11 +110,11 @@ function PropertiesContent() {
 
             {/* Page Header */}
             <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto text-center lg:text-left">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                         Browse Properties
                     </h1>
-                    <p className="text-xl text-[rgb(var(--color-primary-100))] max-w-2xl">
+                    <p className="text-xl text-[rgb(var(--color-primary-100))] max-w-2xl mx-auto lg:mx-0">
                         Explore our collection of {allProperties.length}+ premium properties
                     </p>
                 </div>
@@ -157,18 +157,14 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     City
                                 </label>
-                                <div className="relative">
-                                    <select
-                                        value={selectedCity}
-                                        onChange={(e) => setSelectedCity(e.target.value)}
-                                        className={`${selectClassName} pr-10`}
-                                    >
-                                        {cities.map((city) => (
-                                            <option key={city} value={city}>{city}</option>
-                                        ))}
-                                    </select>
-                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
-                                </div>
+                                <Select
+                                    value={selectedCity}
+                                    onChange={(val) => setSelectedCity(val as string)}
+                                    options={[
+                                        { value: 'All Cities', label: 'All Cities' },
+                                        ...cities.filter(c => c !== 'All Cities').map(c => ({ value: c, label: c }))
+                                    ]}
+                                />
                             </div>
 
                             {/* Property Type */}
@@ -176,18 +172,14 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     Property Type
                                 </label>
-                                <div className="relative">
-                                    <select
-                                        value={selectedType}
-                                        onChange={(e) => setSelectedType(e.target.value)}
-                                        className={`${selectClassName} pr-10`}
-                                    >
-                                        {propertyTypesFilter.map((type) => (
-                                            <option key={type} value={type}>{type}</option>
-                                        ))}
-                                    </select>
-                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
-                                </div>
+                                <Select
+                                    value={selectedType}
+                                    onChange={(val) => setSelectedType(val as string)}
+                                    options={[
+                                        { value: 'All Types', label: 'All Types' },
+                                        ...propertyTypesFilter.filter(t => t !== 'All Types').map(t => ({ value: t, label: t }))
+                                    ]}
+                                />
                             </div>
 
                             {/* Price Range */}
@@ -195,18 +187,14 @@ function PropertiesContent() {
                                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                     Price Range
                                 </label>
-                                <div className="relative">
-                                    <select
-                                        value={selectedPriceRange}
-                                        onChange={(e) => setSelectedPriceRange(Number(e.target.value))}
-                                        className={`${selectClassName} pr-10`}
-                                    >
-                                        {priceRanges.map((range, index) => (
-                                            <option key={index} value={index}>{range.label}</option>
-                                        ))}
-                                    </select>
-                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
-                                </div>
+                                <Select
+                                    value={selectedPriceRange}
+                                    onChange={(val) => setSelectedPriceRange(Number(val))}
+                                    options={priceRanges.map((range, index) => ({
+                                        value: index,
+                                        label: range.label
+                                    }))}
+                                />
                             </div>
 
                             {/* Active Filters Count */}
@@ -224,18 +212,17 @@ function PropertiesContent() {
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                             <div className="flex items-center gap-4">
                                 <label className="text-sm font-medium text-[rgb(var(--color-neutral-700))]">Sort by:</label>
-                                <div className="relative">
-                                    <select
+                                <div className="min-w-[200px]">
+                                    <Select
                                         value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
-                                        className="px-4 py-2 rounded-lg border border-[rgb(var(--color-neutral-300))] bg-white text-[rgb(var(--color-neutral-900))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none cursor-pointer pr-10"
-                                    >
-                                        <option value="newest">Newest First</option>
-                                        <option value="price-low">Price: Low to High</option>
-                                        <option value="price-high">Price: High to Low</option>
-                                        <option value="sqft">Square Footage</option>
-                                    </select>
-                                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgb(var(--color-neutral-500))] pointer-events-none" />
+                                        onChange={(val) => setSortBy(val as string)}
+                                        options={[
+                                            { value: 'newest', label: 'Newest First' },
+                                            { value: 'price-low', label: 'Price: Low to High' },
+                                            { value: 'price-high', label: 'Price: High to Low' },
+                                            { value: 'sqft', label: 'Square Footage' }
+                                        ]}
+                                    />
                                 </div>
                             </div>
 

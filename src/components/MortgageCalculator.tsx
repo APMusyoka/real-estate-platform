@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Select from './Select';
 
 interface MortgageCalculatorProps {
     defaultPrice?: number;
@@ -161,15 +162,15 @@ export default function MortgageCalculator({ defaultPrice = 500000, compact = fa
                             <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                 Loan Term (years)
                             </label>
-                            <select
+                            <Select
                                 value={loanTerm}
-                                onChange={(e) => setLoanTerm(Number(e.target.value))}
-                                className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all"
-                            >
-                                <option value={15}>15 years</option>
-                                <option value={20}>20 years</option>
-                                <option value={30}>30 years</option>
-                            </select>
+                                onChange={(val) => setLoanTerm(Number(val))}
+                                options={[
+                                    { value: 15, label: '15 years' },
+                                    { value: 20, label: '20 years' },
+                                    { value: 30, label: '30 years' }
+                                ]}
+                            />
                         </div>
 
                         <div>

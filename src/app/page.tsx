@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MapPin, Search, ArrowRight, ChevronDown } from "lucide-react";
-import { Button, PropertyCard, Navigation, Footer } from "@/components";
+import { MapPin, Search, ArrowRight } from "lucide-react";
+import { Button, PropertyCard, Navigation, Footer, Select } from "@/components";
 import { featuredProperties, propertyTypes } from "@/data/mockData";
 
 export default function Home() {
@@ -68,20 +68,17 @@ export default function Home() {
                 <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                   Property Type
                 </label>
-                <div className="relative">
-                  <select
-                    value={searchType}
-                    onChange={(e) => setSearchType(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all appearance-none"
-                  >
-                    <option>All Types</option>
-                    <option>House</option>
-                    <option>Apartment</option>
-                    <option>Condo</option>
-                    <option>Villa</option>
-                  </select>
-                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
-                </div>
+                <Select
+                  value={searchType}
+                  onChange={(val) => setSearchType(val as string)}
+                  options={[
+                    { value: 'All Types', label: 'All Types' },
+                    { value: 'House', label: 'House' },
+                    { value: 'Apartment', label: 'Apartment' },
+                    { value: 'Condo', label: 'Condo' },
+                    { value: 'Villa', label: 'Villa' }
+                  ]}
+                />
               </div>
 
               <div className="md:col-span-2">

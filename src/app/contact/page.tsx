@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Button, Input, Navigation, Footer } from '@/components';
-import { Phone, Mail, MapPin, Share2, Facebook, Twitter, Instagram, Linkedin, Send, Map, ChevronDown } from 'lucide-react';
+import { Button, Input, Navigation, Footer, Select } from '@/components';
+import { Phone, Mail, MapPin, Share2, Facebook, Twitter, Instagram, Linkedin, Send, Map } from 'lucide-react';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -150,22 +150,19 @@ export default function ContactPage() {
                                         <label className="block text-sm font-medium text-[rgb(var(--color-neutral-700))] mb-2">
                                             Subject
                                         </label>
-                                        <div className="relative">
-                                            <select
-                                                value={formData.subject}
-                                                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                                                className="w-full px-4 py-3 rounded-lg border border-[rgb(var(--color-neutral-300))] focus:border-[rgb(var(--color-primary-500))] focus:ring-4 focus:ring-[rgb(var(--color-primary-500)/0.1)] outline-none transition-all bg-white appearance-none"
-                                                required
-                                            >
-                                                <option value="">Select a subject</option>
-                                                <option value="buying">I'm interested in buying</option>
-                                                <option value="selling">I want to sell my property</option>
-                                                <option value="renting">I'm looking to rent</option>
-                                                <option value="general">General inquiry</option>
-                                                <option value="support">Customer support</option>
-                                            </select>
-                                            <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-neutral-400))] pointer-events-none" />
-                                        </div>
+                                        <Select
+                                            value={formData.subject}
+                                            onChange={(val) => setFormData({ ...formData, subject: val as string })}
+                                            options={[
+                                                { value: '', label: 'Select a subject' },
+                                                { value: 'buying', label: "I'm interested in buying" },
+                                                { value: 'selling', label: "I want to sell my property" },
+                                                { value: 'renting', label: "I'm looking to rent" },
+                                                { value: 'general', label: "General inquiry" },
+                                                { value: 'support', label: "Customer support" }
+                                            ]}
+                                            placeholder="Select a subject"
+                                        />
                                     </div>
                                 </div>
 
