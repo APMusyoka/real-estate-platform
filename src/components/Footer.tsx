@@ -50,11 +50,11 @@ export default function Footer() {
                         <p className="text-[rgb(var(--color-neutral-400))] mb-4">
                             Subscribe to get the latest properties and news.
                         </p>
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                             <input
                                 type="email"
                                 placeholder="Your email"
-                                className="flex-1 px-4 py-2 rounded-lg bg-[rgb(var(--color-neutral-800))] border border-[rgb(var(--color-neutral-700))] text-white placeholder:text-[rgb(var(--color-neutral-500))] focus:outline-none focus:border-[rgb(var(--color-primary-500))]"
+                                className="flex-1 min-w-[200px] px-4 py-2 rounded-lg bg-[rgb(var(--color-neutral-800))] border border-[rgb(var(--color-neutral-700))] text-white placeholder:text-[rgb(var(--color-neutral-500))] focus:outline-none focus:border-[rgb(var(--color-primary-500))]"
                             />
                             <Button variant="primary" size="sm">
                                 Subscribe
