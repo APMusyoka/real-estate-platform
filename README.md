@@ -1,45 +1,61 @@
-# Real Estate Platform
+# EstateHub - Real Estate Platform
 
-A modern real estate listing platform for property search, virtual tours, and agent connections.
+A modern, high-performance real estate listing platform designed for seamless property search, virtual tours, and agent connections. Built with the latest web technologies for a premium user experience.
 
-## 🚀 Features
+![EstateHub Preview](public/file.svg)
 
-- 🏠 **Property Listings** - Comprehensive real estate catalog
-- 🔍 **Advanced Search** - Filter by location, price, features
-- 🗺️ **Map Integration** - Interactive property maps
-- 📸 **Photo Galleries** - High-quality property images
-- 🎥 **Virtual Tours** - 360° property views
-- 💰 **Mortgage Calculator** - Payment estimation
-- ❤️ **Favorites** - Save preferred properties
-- 👤 **Agent Profiles** - Connect with real estate agents
-- 📱 **Responsive Design** - Mobile-friendly browsing
-- 📧 **Contact Forms** - Schedule viewings
+## 🚀 Key Features
+
+*   **🏠 Advanced Property Listings**: Comprehensive catalog with sorting, filtering, and responsive grid/list views.
+*   **❤️ Smart Favorites**: Global favorites system with persistent state, allowing users to save and manage properties across the application.
+*   **🗺️ Interactive Maps**: Integrated **Leaflet** maps for property locations and office contact details, optimized for performance (no API keys required).
+*   **📱 Fully Responsive**: extensively tested on mobile, tablet, and desktop, with custom stackable layouts for smaller screens.
+*   **📸 Immersive Galleries**: High-quality property image lightboxes with zoom capabilities.
+*   **💰 Mortgage Calculator**: Real-time monthly payment estimation tool.
+*   **🎨 Custom Design System**: Polished UI with custom `Select` components, Tailwind v4 styling, and smooth animations.
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Maps**: Google Maps API / Mapbox
-- **CMS**: Strapi / Sanity
-- **Forms**: React Hook Form
-- **Deployment**: Vercel
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router & Turbopack)
+*   **Language**: TypeScript
+*   **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+*   **Icons**: Lucide React
+*   **Maps**: React Leaflet / Leaflet
+*   **State Management**: React Context API (Favorites, Toast Notifications)
 
 ## 📋 Getting Started
 
-```bash
-npm install
-npm run dev
-```
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/estatehub.git
+    cd estatehub
+    ```
 
-## 💼 Project Info
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-- **Target Market**: Real estate agencies, property managers, brokers
-- **Project Value**: $2,000 - $6,000 per client
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open usage:**
+    Visit [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 📚 Documentation
 
-See the [/docs](./docs/) folder for detailed documentation.
+For detailed insights into the project structure and development decisions, refer to the [docs](./docs/) folder:
+
+*   [Developer Thoughts & Architecture](./docs/05-developer-thoughts.md)
+*   [Key Features](./docs/02-key-features.md)
+*   [Design System](./docs/03-design-system.md)
+
+## 💼 Project Status
+
+This project is currently in the **Polishing Phase**. Core features are implemented, responsive design is finalized, and code quality has been upgraded to modern standards.
 
 ---
 
-Built with ❤️ for real estate professionals
+Built with ❤️ for real estate professionals.
