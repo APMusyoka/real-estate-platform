@@ -105,23 +105,31 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {/* Main Image */}
-                    <button
-                        onClick={() => openLightbox(activeImageIndex)}
-                        className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden group cursor-zoom-in"
-                    >
-                        <Image
-                            src={images[activeImageIndex]}
-                            alt={property.title}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
-                        <div className={`absolute top-4 right-4 ${statusColors[property.status]} text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider`}>
+                    <div className="relative h-[400px] lg:h-[600px] rounded-2xl overflow-hidden group">
+                        <button
+                            onClick={() => openLightbox(activeImageIndex)}
+                            className="relative w-full h-full cursor-zoom-in block focus:outline-none"
+                        >
+                            <Image
+                                src={images[activeImageIndex]}
+                                alt={property.title}
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                            {/* Zoom indicator on hover */}
+                            <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                                Click to view full size
+                            </div>
+                        </button>
+
+                        <div className={`absolute top-4 right-4 ${statusColors[property.status]} text-white px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider pointer-events-none`}>
                             {statusLabels[property.status]}
                         </div>
+
                         <button
                             onClick={handleFavoriteClick}
-                            className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-all ${favorited ? 'scale-110' : ''
+                            className={`absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-all z-10 ${favorited ? 'scale-110' : ''
                                 }`}
                         >
                             <Heart
@@ -130,11 +138,7 @@ export default function PropertyDetailPage({ params }: { params: Promise<{ id: s
                                 fill={favorited ? 'currentColor' : 'none'}
                             />
                         </button>
-                        {/* Zoom indicator on hover */}
-                        <div className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
-                            Click to view full size
-                        </div>
-                    </button>
+                    </div>
 
                     {/* Thumbnail Grid */}
                     <div className="grid grid-cols-3 gap-4">
