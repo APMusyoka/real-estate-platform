@@ -5,8 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Navigation, Footer } from '@/components';
 
-export const dynamic = 'force-dynamic';
-
 export default function AboutPage() {
     const stats = [
         { label: 'Years in Business', value: '15+' },
