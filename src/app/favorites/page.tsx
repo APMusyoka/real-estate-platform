@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Button, PropertyCard, Navigation } from '@/components';
+import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { useFavorites } from '@/hooks/useFavorites';
 import { allProperties } from '@/data/allProperties';
 
@@ -130,6 +130,7 @@ export default function FavoritesPage() {
                     </div>
                 </section>
             )}
+            <Footer />
         </div>
     );
 }

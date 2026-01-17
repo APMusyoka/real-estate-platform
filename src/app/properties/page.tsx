@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Button, PropertyCard, Navigation } from '@/components';
+import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
 export default function PropertiesPage() {
@@ -278,6 +278,7 @@ export default function PropertiesPage() {
                     </main>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

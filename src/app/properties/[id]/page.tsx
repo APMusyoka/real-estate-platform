@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { Button, Input, Lightbox, Navigation } from '@/components';
+import { Button, Input, Lightbox, Navigation, Footer } from '@/components';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useToast } from '@/context/ToastContext';
 import { allProperties } from '@/data/allProperties';
@@ -349,6 +349,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                     </div>
                 </section>
             )}
+            <Footer />
         </div>
     );
 }

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Button, Input, Navigation } from '@/components';
+import { Button, Input, Navigation, Footer } from '@/components';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -222,6 +222,7 @@ export default function ContactPage() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }

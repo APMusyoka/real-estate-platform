@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button, Input, PropertyCard, Navigation } from '@/components';
+import { Button, Input, PropertyCard, Navigation, Footer } from '@/components';
 import { agents } from '@/data/agents';
 import { allProperties } from '@/data/allProperties';
 import { notFound } from 'next/navigation';
@@ -224,6 +224,7 @@ export default function AgentProfilePage({ params }: { params: { id: string } })
                     </div>
                 </div>
             </section>
+            <Footer />
         </div>
     );
 }
