@@ -83,7 +83,7 @@ export default function PropertyCard({
             `}>
                 {/* Image Container */}
                 <div className={`
-                    relative overflow-hidden flex-shrink-0
+                    relative overflow-hidden shrink-0
                     ${isList ? 'w-[120px] sm:w-[280px] h-auto' : 'h-64 w-full'}
                 `}>
                     <Image

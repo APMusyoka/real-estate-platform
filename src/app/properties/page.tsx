@@ -109,7 +109,7 @@ function PropertiesContent() {
             <Navigation />
 
             {/* Page Header */}
-            <section className="bg-gradient-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
+            <section className="bg-linear-to-r from-[rgb(var(--color-primary-600))] to-[rgb(var(--color-primary-700))] py-16 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto text-center lg:text-left">
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
                         Browse Properties
@@ -123,7 +123,7 @@ function PropertiesContent() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Filters Sidebar */}
-                    <aside className="lg:w-80 flex-shrink-0">
+                    <aside className="lg:w-80 shrink-0">
                         <div className="bg-white rounded-2xl p-6 shadow-md sticky top-28 z-30">
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-xl font-bold text-[rgb(var(--color-neutral-900))]">Filters</h2>

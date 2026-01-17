@@ -12,7 +12,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 bg-gradient-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] rounded-lg flex items-center justify-center">
+                            <div className="w-10 h-10 bg-linear-to-br from-[rgb(var(--color-primary-500))] to-[rgb(var(--color-primary-700))] rounded-lg flex items-center justify-center">
                                 <Home className="w-6 h-6 text-white" />
                             </div>
                             <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
