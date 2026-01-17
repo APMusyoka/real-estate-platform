@@ -1,16 +1,13 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button, PropertyCard, Navigation, Footer } from '@/components';
 import { allProperties, cities, propertyTypesFilter, priceRanges } from '@/data/allProperties';
 
-// Disable static pre-rendering to allow useSearchParams
-export const dynamic = 'force-dynamic';
-export const runtime = 'edge';
-
-export default function PropertiesPage() {
+// Component that uses useSearchParams - must be wrapped in Suspense
+function PropertiesContent() {
     const searchParams = useSearchParams();
 
     // Initialize state from URL parameters
@@ -284,5 +281,13 @@ export default function PropertiesPage() {
             </div>
             <Footer />
         </div>
+    );
+}
+
+export default function PropertiesPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[rgb(var(--color-neutral-50))] flex items-center justify-center">Loading...</div>}>
+            <PropertiesContent />
+        </Suspense>
     );
 }
