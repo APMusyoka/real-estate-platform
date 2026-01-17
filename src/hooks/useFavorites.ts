@@ -10,12 +10,14 @@ export function useFavorites() {
 
     // Load favorites from localStorage on mount
     useEffect(() => {
-        const stored = localStorage.getItem(FAVORITES_KEY);
-        if (stored) {
-            try {
-                setFavorites(JSON.parse(stored));
-            } catch (e) {
-                console.error('Error loading favorites:', e);
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem(FAVORITES_KEY);
+            if (stored) {
+                try {
+                    setFavorites(JSON.parse(stored));
+                } catch (e) {
+                    console.error('Error loading favorites:', e);
+                }
             }
         }
         setIsLoaded(true);
@@ -23,7 +25,7 @@ export function useFavorites() {
 
     // Save favorites to localStorage whenever they change
     useEffect(() => {
-        if (isLoaded) {
+        if (isLoaded && typeof window !== 'undefined') {
             localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
         }
     }, [favorites, isLoaded]);
